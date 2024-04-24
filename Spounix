@@ -1,1 +1,26 @@
+import requests
+
+def send_text_to_nlp_api(text):
+    api_url = "https://nlp-api.com"
+    
+    data = {
+        "text": text
+    }
+    
+    response = requests.post(api_url, json=data)
+    
+    if response.status_code == 200:
+        result = response.json()
+        return result
+    else:
+        return {"error": "Failed to connect to NLP API"}
+
+text = "Какая погода сегодня?"
+
+result = send_text_to_nlp_api(text)
+
+if "error" in result:
+    print(result["error"])
+else:
+    print("Ответ на вопрос: {}".format(result["answer"]))
 
